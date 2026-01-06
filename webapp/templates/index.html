@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAM2 Demo</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>SAM2 이미지 세그멘테이션</h1>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="file-area">
+          <label class="dropzone" id="dropzone">
+            <input id="fileInput" type="file" accept="image/*" hidden />
+            <span>여기에 이미지를 드래그하거나 클릭하여 선택</span>
+          </label>
+        </div>
+        <div class="options">
+          <label>모드
+            <select id="mode">
+              <option value="auto">자동(중앙 클릭)</option>
+              <option value="points">포인트</option>
+              <option value="box">박스</option>
+            </select>
+          </label>
+          <label><input type="checkbox" id="multimask" /> 멀티 마스크</label>
+          <button id="clearBtn" type="button">프롬프트 초기화</button>
+          <button id="runBtn" type="button">실행</button>
+        </div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="0" height="0"></canvas>
+      </div>
+      <div class="hint">
+        - 포인트: 좌클릭=긍정, 우클릭=부정 (컨텍스트 메뉴가 뜨면 한번 더) / 박스: Shift 누른 상태로 드래그<br />
+      </div>
+      <div id="progress" class="progress" hidden>처리 중...</div>
+    </div>
+
+    {% if error %}
+    <div class="error" style="margin-top:12px;color:#ff9b9b;">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <div id="results" class="results" hidden></div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
+

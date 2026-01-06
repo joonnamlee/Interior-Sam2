@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# IDE/Editor
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Project outputs
+outputs/
+webapp/static/outputs/
+
+# Model weights and large artifacts
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.bin
+*.safetensors
+
+# Node-style artifacts (if added later)
+node_modules/
+
+# Cursor/Editor metadata
+.cursor/
+.history/
+
+
