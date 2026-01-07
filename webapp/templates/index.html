@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SAM2 Demo</title>
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -27,6 +28,15 @@
             </select>
           </label>
           <label><input type="checkbox" id="multimask" /> 멀티 마스크</label>
+          <label><input type="checkbox" id="refineDepth" /> 깊이 기반 정제</label>
+          <label><input type="checkbox" id="growRegion" /> 영역 성장</label>
+          <label style="display:flex;align-items:center;gap:8px;">
+            허용오차 <input type="range" id="depthTol" min="0.01" max="0.2" step="0.01" value="0.08" />
+            <span id="depthTolVal">0.08</span>
+          </label>
+          <label><input type="checkbox" id="exportPly" /> PLY 내보내기</label>
+          <label><input type="checkbox" id="withSemantic" /> SegFormer(ADE20K) 오브젝트 인식</label>
+          <label><input type="checkbox" id="wallDemo" /> 벽 제거 데모(레이어1/2/오버레이)</label>
           <button id="clearBtn" type="button">프롬프트 초기화</button>
           <button id="runBtn" type="button">실행</button>
         </div>
@@ -47,7 +57,30 @@
     </div>
     {% endif %}
 
-    <div id="results" class="results" hidden></div>
+    <div class="main-content">
+      <div id="results" class="results" hidden></div>
+      <div id="palettePanel" class="palette-panel">
+        <h3>색상 팔레트</h3>
+        <div class="palette-grid" id="paletteGrid"></div>
+        <div class="color-picker-wrap">
+          <label>커스텀 색상
+            <input type="color" id="customColor" value="#4f8cff" />
+          </label>
+        </div>
+        <div class="selected-mask-info" id="maskInfo">
+          <p>선택된 마스크: <span id="maskName">-</span> (<span id="maskCount">0</span>개)</p>
+          <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+            투명도 <input type="range" id="alphaSlider" min="0" max="100" step="1" value="60" />
+            <span id="alphaVal">60%</span>
+          </label>
+          <button id="colorizeBtn" type="button" disabled>색칠하기</button>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid #1b2740;">
+            <button id="undoBtn" type="button" disabled style="width:100%;margin-bottom:4px;background:#666;">되돌리기</button>
+            <button id="redoBtn" type="button" disabled style="width:100%;background:#666;">다시하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="/static/app.js"></script>
 </body>
